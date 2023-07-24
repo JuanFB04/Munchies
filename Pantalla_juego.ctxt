@@ -1,7 +1,18 @@
 #BlueJ class context
 comment0.target=Pantalla_juego
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Pantalla_juego\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Pantalla\ de\ juego\ principal\r\n
 comment1.params=
 comment1.target=Pantalla_juego()
-comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Pantalla_juego.\r\n\ \r\n
-numComments=2
+comment1.text=\r\n\ Constructor\r\n
+comment2.params=
+comment2.target=void\ act()
+comment3.params=start\ end
+comment3.target=int\ getRandomNumber(int,\ int)
+comment4.params=
+comment4.target=void\ agregar_ojo()
+comment4.text=\r\n\ Agregar\ toppings\r\n
+comment5.params=
+comment5.target=void\ agregar_cerebro()
+comment6.params=
+comment6.target=void\ agregar_bicho()
+numComments=7

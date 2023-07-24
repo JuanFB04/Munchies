@@ -1,22 +1,19 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Tortuga here.
+ * Write a description of class Bicho_topping here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Tortuga extends Actor
+public class Bicho_topping extends Actor
 {
     /**
-     * Act - do whatever the Tortuga wants to do. This method is called whenever
+     * Act - do whatever the Bicho_topping wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act()
     {
-        setLocation(0,0);
-        if(Greenfoot.isKeyDown("a")){
-            move(5);
-        }
+        // Add your action code here.
     }
 }
