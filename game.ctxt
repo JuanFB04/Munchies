@@ -1,8 +1,8 @@
 #BlueJ class context
-comment0.target=Pantalla_juego
+comment0.target=game
 comment0.text=\r\n\ Pantalla\ de\ juego\ principal\r\n
 comment1.params=
-comment1.target=Pantalla_juego()
+comment1.target=game()
 comment1.text=\r\n\ Constructor\r\n
 comment2.params=
 comment2.target=void\ act()

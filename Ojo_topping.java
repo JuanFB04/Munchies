@@ -16,7 +16,7 @@ public class Ojo_topping extends Actor
         if (Greenfoot.isKeyDown("Enter")){
         move(5);
     }
-    if (Greenfoot.isKeyDown("p")){
+    if (Greenfoot.isKeyDown("l")){
         move(-5);
     }
     }

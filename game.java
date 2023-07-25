@@ -3,19 +3,24 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Pantalla de juego principal
  */
-public class Pantalla_juego extends World
+public class game extends World
 {
     int cant_ojos=0;
     int cant_cerebros=0;
     int cant_bichos=0;
+    SimpleTimer tim = new SimpleTimer();
+    Counter timeCount = new Counter();
+    private int start = 0;
     /**
      * Constructor
      */
-    public Pantalla_juego(){    
+    public game(){    
         super(500, 500, 1); 
-        setBackground("Pantalla_juego.png");
         Pizza pizza1=new Pizza();
         addObject(pizza1,250,420);
+        addObject(timeCount, getWidth()/2, getHeight()/13);
+        timeCount.setValue(60);
+        Greenfoot.setSpeed(50);
        
         }
     public void act(){
@@ -30,6 +35,21 @@ public class Pantalla_juego extends World
         if(Greenfoot.isKeyDown("e")){
             agregar_bicho();
             Greenfoot.delay(15);
+        }
+        
+        if (start == 1)
+        {
+            if (tim.millisElapsed() >= 1000)
+            {
+                timeCount.add(-1);
+                tim.mark();
+            }
+        }
+        
+        if (Greenfoot.isKeyDown("space"))
+        {
+            start = 1;
+            tim.mark();
         }
     }
     
@@ -61,9 +81,3 @@ public class Pantalla_juego extends World
     }
     
 }
-    
-        
-    
-    
-
-
