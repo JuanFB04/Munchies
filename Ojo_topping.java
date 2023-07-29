@@ -13,11 +13,6 @@ public class Ojo_topping extends Actor
     */
     public void act()
     {
-        if (Greenfoot.isKeyDown("Enter")){
-        move(5);
-    }
-    if (Greenfoot.isKeyDown("l")){
-        move(-5);
-    }
+   
     }
 }

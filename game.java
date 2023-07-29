@@ -5,51 +5,88 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class game extends World
 {
-    int cant_ojos=0;
-    int cant_cerebros=0;
-    int cant_bichos=0;
+    int cant_ojos=0, orden_ojos=0;
+    int cant_cerebros=0, orden_cerebros=0;
+    int cant_bichos=0,orden_bichos=0;
+    String orden_color;
+    int score=0;
+    Pizza pizza1=new Pizza("neutral");
     SimpleTimer tim = new SimpleTimer();
     Counter timeCount = new Counter();
-    public int start = 60;
+    Boolean run=false;
     /**
      * Constructor
      */
     public game(){    
         super(500, 500, 1); 
-        Pizza pizza1=new Pizza();
         addObject(pizza1,250,420);
         addObject(timeCount, getWidth()/2, getHeight()/13);
-        timeCount.setValue(60);
-        Greenfoot.setSpeed(50);
+        timeCount.setValue(20);
+        Greenfoot.setSpeed(45);
        
         }
     public void act(){
+        showText(("Punteo:"),50,35);
+        showText(Integer.toString(score),120,35);
         if(Greenfoot.isKeyDown("q")){
             agregar_ojo();
-            Greenfoot.delay(15);
+            Greenfoot.delay(7);
         }
         if(Greenfoot.isKeyDown("w")){
             agregar_cerebro();
-            Greenfoot.delay(15);
+            Greenfoot.delay(7);
         }
         if(Greenfoot.isKeyDown("e")){
             agregar_bicho();
-            Greenfoot.delay(15);
+            Greenfoot.delay(7);
+        }
+        if(Greenfoot.isKeyDown("k")){
+            limpiar_tablero();
+            generar_orden();
+            Fail fail = new Fail();
+            addObject(fail,250,250);
+            Greenfoot.delay(5);
+            removeObjects(getObjects(Fail.class));
+            Greenfoot.delay(10);
+        }
+        if(Greenfoot.isKeyDown("enter")){
+            if(comprobar_orden()==true){
+            score+=100;
+            timeCount.setValue(timeCount.getValue()+5);
+            Nice nice = new Nice();
+            addObject(nice,250,250);
+            Greenfoot.delay(5);
+            removeObjects(getObjects(Nice.class));
+            limpiar_tablero();
+            generar_orden();
+            }
+            else{
+            limpiar_tablero();
+            generar_orden();
+            Fail fail = new Fail();
+            addObject(fail,250,250);
+            Greenfoot.delay(5);
+            removeObjects(getObjects(Fail.class));
+            }
+            Greenfoot.delay(10);
+        
+        }
+        /**
+         * Inicio del juego al presionar space y fin al llegar el timer a 0
+         */
+          if (Greenfoot.isKeyDown("space")){
+            run=true;
+            generar_orden();
+            Greenfoot.delay(10);
+            timeCount.setValue(20);
+            tim.mark();
         }
         
-        if (start == 60)
-        {
-            if (tim.millisElapsed() >= 1000)
-            {
+        if (run==true){
+            if (tim.millisElapsed() >= 1000){
                 timeCount.add(-1);
                 tim.mark();
             }
-        }
-        
-        if (Greenfoot.isKeyDown("space"))
-        {
-            start = 60;
-            tim.mark();
         }
         
         if (timeCount.getValue() == 0)
@@ -78,12 +115,64 @@ public class game extends World
         int randy=getRandomNumber(360,480);
         Cerebro_topping cerebro1 = new Cerebro_topping();
         addObject(cerebro1,randx,randy);
+        cant_cerebros ++;
     }
     public void agregar_bicho(){
         int randx=getRandomNumber(180,320);
         int randy=getRandomNumber(360,480);
         Bicho_topping bicho1 = new Bicho_topping();
         addObject(bicho1,randx,randy);
+        cant_bichos ++;
     }
     
-}
+    /**
+     * Generar orden a cumplir
+     */
+     public void generar_orden(){
+        orden_ojos=getRandomNumber(1,6);
+        orden_cerebros=getRandomNumber(1,6);
+        orden_bichos=getRandomNumber(1,6);
+        int num_color=getRandomNumber(1,3);
+        showText(Integer.toString(orden_ojos),400,95);
+        showText(Integer.toString(orden_cerebros),400,125);
+        showText(Integer.toString(orden_bichos),400,155);
+        Salsa salsa1 = new Salsa();
+        addObject(salsa1,420,190);
+        if(num_color==1){
+            orden_color="morado";
+            salsa1.Cambio_salsa("morado");
+        }
+        if(num_color==2){
+            orden_color="azul";
+            salsa1.Cambio_salsa("azul");
+        }
+        if(num_color==3){
+            orden_color="verde";
+            salsa1.Cambio_salsa("verde");
+        }
+    }
+    /**
+     * Quita todos los objetos y reinicia los counters de objetos
+     */
+    public void limpiar_tablero(){
+        cant_ojos=0;
+        cant_cerebros=0;
+        cant_bichos=0;
+        pizza1.quitar_Salsa();
+        removeObjects(getObjects(Ojo_topping.class));
+        removeObjects(getObjects(Cerebro_topping.class));
+        removeObjects(getObjects(Bicho_topping.class));
+        removeObjects(getObjects(Salsa.class));
+    }
+    /**
+     * Comprueba si la orden coincide con lo solicitado
+     */
+    public boolean comprobar_orden(){
+        boolean ojos_check=(cant_ojos==orden_ojos);
+        boolean cerebros_check=(cant_cerebros==orden_cerebros);
+        boolean bichos_check=(cant_bichos==orden_bichos);
+        boolean salsa_check=(pizza1.getColor_pizza()==orden_color);
+        return(ojos_check==true & cerebros_check==true & bichos_check==true & salsa_check==true);
+        }
+    }
+

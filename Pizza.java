@@ -13,20 +13,27 @@ public class Pizza extends Actor
      */
     String color_pizza;
     
+    public Pizza(String color_pizza){
+        this.color_pizza = color_pizza;
+    }
+    
+    public String getColor_pizza(){
+        return color_pizza;
+    }
+    public void setColor_pizza(){
+        this.color_pizza=color_pizza;
+    }
+    
     public void act(){
     if(Greenfoot.isKeyDown("a")){
         agregar_Smorada();
-        Greenfoot.delay(10);
     }
     if(Greenfoot.isKeyDown("s")){
         agregar_Sazul();
-        Greenfoot.delay(10);
     }
     if(Greenfoot.isKeyDown("d")){
         agregar_Sverde();
-        Greenfoot.delay(10);
         }
-    
     }
 
     /**
@@ -43,6 +50,10 @@ public class Pizza extends Actor
     public void agregar_Sverde(){
         setImage("Pizza_verde.png");
         color_pizza="verde";
+    }
+     public void quitar_Salsa(){
+        setImage("Pizza.png");
+        color_pizza="neutral";
     }
 
 }
