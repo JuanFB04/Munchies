@@ -10,7 +10,7 @@ public class game extends World
     int cant_bichos=0;
     SimpleTimer tim = new SimpleTimer();
     Counter timeCount = new Counter();
-    private int start = 0;
+    public int start = 60;
     /**
      * Constructor
      */
@@ -37,7 +37,7 @@ public class game extends World
             Greenfoot.delay(15);
         }
         
-        if (start == 1)
+        if (start == 60)
         {
             if (tim.millisElapsed() >= 1000)
             {
@@ -48,9 +48,15 @@ public class game extends World
         
         if (Greenfoot.isKeyDown("space"))
         {
-            start = 1;
+            start = 60;
             tim.mark();
         }
+        
+        if (timeCount.getValue() == 0)
+        {
+            Greenfoot.setWorld(new gamover());
+        }
+        
     }
     
     public int getRandomNumber(int start,int end){
