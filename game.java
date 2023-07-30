@@ -10,6 +10,7 @@ public class game extends World
     int cant_bichos=0,orden_bichos=0;
     String orden_color;
     int score=0;
+    int lives = 3;
     Pizza pizza1=new Pizza("neutral");
     SimpleTimer tim = new SimpleTimer();
     Counter timeCount = new Counter();
@@ -21,13 +22,18 @@ public class game extends World
         super(500, 500, 1); 
         addObject(pizza1,250,420);
         addObject(timeCount, getWidth()/2, getHeight()/13);
-        timeCount.setValue(20);
+        timeCount.setValue(60);
         Greenfoot.setSpeed(45);
+        addObject(new vidas(),410, 30);
        
         }
     public void act(){
-        showText(("Punteo:"),50,35);
-        showText(Integer.toString(score),120,35);
+        showText(("Punteo:"),50,30);
+        showText(Integer.toString(score),120,30);
+        
+        showText(("x "), 440,30);
+        showText(Integer.toString(lives),450,30);
+        
         if(Greenfoot.isKeyDown("q")){
             agregar_ojo();
             Greenfoot.delay(7);
@@ -61,13 +67,26 @@ public class game extends World
             generar_orden();
             }
             else{
+
+            timeCount.setValue(timeCount.getValue()-5);
+            lives--;
+            if (lives <= 0){
+                gamover.prepare(score);
+                Greenfoot.setWorld(new gamover());
+            }
+            
+            else{
             limpiar_tablero();
             generar_orden();
             Fail fail = new Fail();
             addObject(fail,250,250);
             Greenfoot.delay(5);
             removeObjects(getObjects(Fail.class));
+            
+        }
+            
             }
+            
             Greenfoot.delay(10);
         
         }
@@ -89,7 +108,7 @@ public class game extends World
             }
         }
         
-        if (timeCount.getValue() == 0)
+        if (timeCount.getValue() <= 0)
         {
             Greenfoot.setWorld(new gamover());
         }
