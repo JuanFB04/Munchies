@@ -16,9 +16,7 @@ public class game extends World
     Counter timeCount = new Counter();
     Boolean run=false;
     private boolean isgamover = false;
-    GreenfootSound backgroundMusic = new GreenfootSound("sounds/backgroundMusic.wav");
-    //public GreenfootSound backgroundMusic;
-    
+
     /**
      * Constructor
      */
@@ -29,8 +27,6 @@ public class game extends World
         timeCount.setValue(60);
         Greenfoot.setSpeed(45);
         addObject(new vidas(),410, 30);
-        backgroundMusic.playLoop();
-        backgroundMusic.setVolume(70); // Ajustar el volumen (0-100)
         }
         
     public void act(){
