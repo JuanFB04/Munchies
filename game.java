@@ -15,6 +15,10 @@ public class game extends World
     SimpleTimer tim = new SimpleTimer();
     Counter timeCount = new Counter();
     Boolean run=false;
+    private boolean isgamover = false;
+    GreenfootSound backgroundMusic = new GreenfootSound("sounds/backgroundMusic.wav");
+    //public GreenfootSound backgroundMusic;
+    
     /**
      * Constructor
      */
@@ -25,8 +29,10 @@ public class game extends World
         timeCount.setValue(60);
         Greenfoot.setSpeed(45);
         addObject(new vidas(),410, 30);
-       
+        backgroundMusic.playLoop();
+        backgroundMusic.setVolume(70); // Ajustar el volumen (0-100)
         }
+        
     public void act(){
         showText(("Punteo:"),50,30);
         showText(Integer.toString(score),120,30);
@@ -36,15 +42,15 @@ public class game extends World
         
         if(Greenfoot.isKeyDown("q")){
             agregar_ojo();
-            Greenfoot.delay(7);
+            Greenfoot.delay(5);
         }
         if(Greenfoot.isKeyDown("w")){
             agregar_cerebro();
-            Greenfoot.delay(7);
+            Greenfoot.delay(5);
         }
         if(Greenfoot.isKeyDown("e")){
             agregar_bicho();
-            Greenfoot.delay(7);
+            Greenfoot.delay(5);
         }
         if(Greenfoot.isKeyDown("k")){
             limpiar_tablero();
@@ -93,11 +99,11 @@ public class game extends World
         /**
          * Inicio del juego al presionar space y fin al llegar el timer a 0
          */
-          if (Greenfoot.isKeyDown("space")){
+          if (Greenfoot.isKeyDown("space") && !run){
             run=true;
             generar_orden();
             Greenfoot.delay(10);
-            timeCount.setValue(20);
+            timeCount.setValue(60);
             tim.mark();
         }
         
@@ -119,6 +125,7 @@ public class game extends World
        int normal = Greenfoot.getRandomNumber(end-start+1);
        return normal+start;
     }
+    
     /**
      * Agregar toppings
      */
