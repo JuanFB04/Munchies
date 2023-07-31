@@ -26,19 +26,24 @@ public class game extends World
        
         }
     public void act(){
+        /**
+         * Texto en pantalla
+         */
         showText(("Punteo:"),50,35);
         showText(Integer.toString(score),120,35);
+        
+        
         if(Greenfoot.isKeyDown("q")){
             agregar_ojo();
-            Greenfoot.delay(7);
+            Greenfoot.delay(5);
         }
         if(Greenfoot.isKeyDown("w")){
             agregar_cerebro();
-            Greenfoot.delay(7);
+            Greenfoot.delay(5);
         }
         if(Greenfoot.isKeyDown("e")){
             agregar_bicho();
-            Greenfoot.delay(7);
+            Greenfoot.delay(5);
         }
         if(Greenfoot.isKeyDown("k")){
             limpiar_tablero();
