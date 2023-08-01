@@ -14,8 +14,10 @@ public class game extends World
     Pizza pizza1=new Pizza("neutral");
     SimpleTimer tim = new SimpleTimer();
     Counter timeCount = new Counter();
+    Counter difficultyTimer = new Counter();
     Boolean run=false;
     private boolean isgamover = false;
+    GreenfootSound backgroundMusic = new GreenfootSound("sounds/backgroundMusic.mp3");
 
     /**
      * Constructor
@@ -27,6 +29,8 @@ public class game extends World
         timeCount.setValue(60);
         Greenfoot.setSpeed(45);
         addObject(new vidas(),410, 30);
+        backgroundMusic.playLoop();
+        backgroundMusic.setVolume(40); 
         }
         
     public void act(){
@@ -75,6 +79,7 @@ public class game extends World
             if (lives <= 0){
                 gamover.prepare(score);
                 Greenfoot.setWorld(new gamover());
+                backgroundMusic.stop();
             }
             
             else{
@@ -106,13 +111,15 @@ public class game extends World
         if (run==true){
             if (tim.millisElapsed() >= 1000){
                 timeCount.add(-1);
+                difficultyTimer.add(1);
                 tim.mark();
             }
         }
         
-        if (timeCount.getValue() <= 0)
-        {
+        if (timeCount.getValue() <= 0){
+            gamover.prepare(score);
             Greenfoot.setWorld(new gamover());
+            backgroundMusic.stop();
         }
         
     }
@@ -151,9 +158,16 @@ public class game extends World
      * Generar orden a cumplir
      */
      public void generar_orden(){
+        if(difficultyTimer.getValue()>=30){
+        orden_ojos=getRandomNumber(3,6);
+        orden_cerebros=getRandomNumber(3,6);
+        orden_bichos=getRandomNumber(3,6);   
+        }
+        else{
         orden_ojos=getRandomNumber(1,6);
         orden_cerebros=getRandomNumber(1,6);
         orden_bichos=getRandomNumber(1,6);
+        }
         int num_color=getRandomNumber(1,3);
         showText(Integer.toString(orden_ojos),400,95);
         showText(Integer.toString(orden_cerebros),400,125);

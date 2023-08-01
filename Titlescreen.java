@@ -18,5 +18,7 @@ public class Titlescreen extends World
         super(500, 500, 1);
         setBackground("Titlescreen.png");
         addObject(new startbutton(),250, 360);
+        showText("Presionar espacio después",250,450);
+        showText("después de esta pantalla para empezar",250,470);
     }
 }
