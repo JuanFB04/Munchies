@@ -14,16 +14,9 @@ public class game extends World
     Pizza pizza1=new Pizza("neutral");
     SimpleTimer tim = new SimpleTimer();
     Counter timeCount = new Counter();
-    Counter difficultyTimer = new Counter();
     Boolean run=false;
     private boolean isgamover = false;
-<<<<<<< HEAD
-    GreenfootSound backgroundMusic = new GreenfootSound("sounds/backgroundMusic.mp3");
-    //public GreenfootSound backgroundMusic;
-    
-=======
 
->>>>>>> c3e913a0193cdbc3030c38817843903580dbb61f
     /**
      * Constructor
      */
@@ -32,14 +25,8 @@ public class game extends World
         addObject(pizza1,250,420);
         addObject(timeCount, getWidth()/2, getHeight()/13);
         timeCount.setValue(60);
-        difficultyTimer.setValue(0);
         Greenfoot.setSpeed(45);
         addObject(new vidas(),410, 30);
-<<<<<<< HEAD
-        backgroundMusic.playLoop();
-        backgroundMusic.setVolume(40); // Ajustar el volumen (0-100)
-=======
->>>>>>> c3e913a0193cdbc3030c38817843903580dbb61f
         }
         
     public void act(){
@@ -51,15 +38,15 @@ public class game extends World
         
         if(Greenfoot.isKeyDown("q")){
             agregar_ojo();
-            Greenfoot.delay(6);
+            Greenfoot.delay(5);
         }
         if(Greenfoot.isKeyDown("w")){
             agregar_cerebro();
-            Greenfoot.delay(6);
+            Greenfoot.delay(5);
         }
         if(Greenfoot.isKeyDown("e")){
             agregar_bicho();
-            Greenfoot.delay(6);
+            Greenfoot.delay(5);
         }
         if(Greenfoot.isKeyDown("k")){
             limpiar_tablero();
@@ -81,20 +68,20 @@ public class game extends World
             limpiar_tablero();
             generar_orden();
             }
-            
             else{
+
             timeCount.setValue(timeCount.getValue()-5);
             lives--;
             if (lives <= 0){
                 gamover.prepare(score);
                 Greenfoot.setWorld(new gamover());
-                backgroundMusic.stop();
             }
             
             else{
             limpiar_tablero();
             generar_orden();
-            addObject(new Fail(),250,250);
+            Fail fail = new Fail();
+            addObject(fail,250,250);
             Greenfoot.delay(5);
             removeObjects(getObjects(Fail.class));
             
@@ -119,7 +106,6 @@ public class game extends World
         if (run==true){
             if (tim.millisElapsed() >= 1000){
                 timeCount.add(-1);
-                difficultyTimer.add(1);
                 tim.mark();
             }
         }
@@ -127,8 +113,8 @@ public class game extends World
         if (timeCount.getValue() <= 0)
         {
             Greenfoot.setWorld(new gamover());
-            backgroundMusic.stop();
-        }     
+        }
+        
     }
     
     public int getRandomNumber(int start,int end){
@@ -165,16 +151,9 @@ public class game extends World
      * Generar orden a cumplir
      */
      public void generar_orden(){
-        if(difficultyTimer.getValue()>=30){
-        orden_ojos=getRandomNumber(3,6);
-        orden_cerebros=getRandomNumber(3,6);
-        orden_bichos=getRandomNumber(3,6);   
-        }
-        else{
         orden_ojos=getRandomNumber(1,6);
         orden_cerebros=getRandomNumber(1,6);
         orden_bichos=getRandomNumber(1,6);
-        }
         int num_color=getRandomNumber(1,3);
         showText(Integer.toString(orden_ojos),400,95);
         showText(Integer.toString(orden_cerebros),400,125);
